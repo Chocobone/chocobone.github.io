@@ -18,16 +18,24 @@
         href="data:image/png;base64,iVBORw0KGgo="
     />
 
-    <!-- Fonts: English (Headings/Content), Korean (DungGeunMo), Japanese (DotGothic16 as pixel fallback) -->
+    <!-- Fonts: Local Assets First -->
+    <style>
+        @font-face {
+            font-family: "DungGeunMo";
+            src: url("{{ site.baseurl }}/assets/fonts/DungGeunMo.woff")
+                format("woff");
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
+
+    <!-- Fonts: English (Headings/Content), Korean (DungGeunMo Local), Japanese (DotGothic16) -->
     <link
         href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&display=swap"
         rel="stylesheet"
     />
     <link href="https://fonts.cdnfonts.com/css/kongtext" rel="stylesheet" />
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/orioncactus/duunggeunmo/css/duunggeunmo.css"
-    />
 
     <link href="https://unpkg.com/nes.css/css/nes.min.css" rel="stylesheet" />
     <style>
