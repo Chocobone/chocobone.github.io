@@ -1,6 +1,20 @@
-<nav>
-    <a class="site-title" href="{{ site.baseurl }}/">{{ site.title }}</a>
+<nav
+    style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 20px;
+        border-bottom: 4px solid #212529;
+        margin-bottom: 20px;
+    "
+>
+    <a
+        class="nes-btn is-primary"
+        href="{{ site.baseurl }}/"
+        style="margin-right: 10px"
+        >{{ site.title }}</a
+    >
     <div>
-        <a class="nav-link" href="{{ site.baseurl }}/about">About</a>
+        <a class="nes-btn" href="{{ site.baseurl }}/about">About</a>
     </div>
 </nav>
