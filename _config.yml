@@ -1,4 +1,4 @@
-title: Chocobone
+title: chocobone.dev
 include: ["_pages"]
 exclude: ["_includes/notes_graph.json"]
 baseurl: ""
