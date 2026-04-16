@@ -209,16 +209,12 @@ code {
   height: 24px;
   position: relative;
   width: 50px;
-}
-
-.theme-switch input {
-  display: none;
+  cursor: pointer;
 }
 
 .slider {
   background-color: #ccc;
   bottom: 0;
-  cursor: pointer;
   left: 0;
   position: absolute;
   right: 0;
@@ -239,11 +235,11 @@ code {
   border: 2px solid #212529;
 }
 
-input:checked + .slider {
+.theme-switch.is-active .slider {
   background-color: #209cee;
 }
 
-input:checked + .slider:before {
+.theme-switch.is-active .slider:before {
   transform: translateX(26px);
 }
 

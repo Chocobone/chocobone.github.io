@@ -2,24 +2,35 @@
     <span style="margin-right: 8px; font-size: 0.8rem" id="theme-label-icon"
         >🌙</span
     >
-    <label class="theme-switch" for="checkbox">
-        <input type="checkbox" id="checkbox" />
+    <div class="theme-switch" id="theme-toggle-switch">
         <div class="slider"></div>
-    </label>
+    </div>
 </div>
 
 <script>
-    const toggleSwitch = document.querySelector(
-        '.theme-switch input[type="checkbox"]',
-    );
+    const themeSwitch = document.getElementById("theme-toggle-switch");
     const labelIcon = document.getElementById("theme-label-icon");
 
     function updateSwitchUI(theme) {
         const isDark = theme === "dark";
-        toggleSwitch.checked = isDark;
+        if (isDark) {
+            themeSwitch.classList.add("is-active");
+        } else {
+            themeSwitch.classList.remove("is-active");
+        }
+
         if (labelIcon) {
             labelIcon.textContent = isDark ? "☀️" : "🌙";
         }
+    }
+
+    function toggleTheme() {
+        const isDark = document.body.classList.contains("is-dark");
+        const nextTheme = isDark ? "light" : "dark";
+
+        localStorage.setItem("theme", nextTheme);
+        applyTheme(nextTheme);
+        updateSwitchUI(nextTheme);
     }
 
     // Initial switch state based on current body class
@@ -30,14 +41,5 @@
         updateSwitchUI(currentTheme);
     });
 
-    toggleSwitch.addEventListener(
-        "change",
-        (e) => {
-            const theme = e.target.checked ? "dark" : "light";
-            localStorage.setItem("theme", theme);
-            applyTheme(theme);
-            updateSwitchUI(theme);
-        },
-        false,
-    );
+    themeSwitch.addEventListener("click", toggleTheme);
 </script>
