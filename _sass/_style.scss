@@ -196,61 +196,6 @@ code {
   font-size: 0.9em;
 }
 
-/* Retro Switch */
-.theme-switch-wrapper {
-  display: flex;
-  align-items: center;
-  margin-left: 20px;
-}
-
-.theme-switch {
-  display: inline-block;
-  height: 24px;
-  position: relative;
-  width: 50px;
-  cursor: pointer;
-}
-
-.slider {
-  background-color: #ccc;
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  transition: .4s;
-  border: 2px solid #212529;
-}
-
-.slider:before {
-  background-color: #fff;
-  bottom: 2px;
-  content: "";
-  height: 16px;
-  left: 2px;
-  position: absolute;
-  transition: .4s;
-  width: 16px;
-  border: 2px solid #212529;
-}
-
-.theme-switch.is-active .slider {
-  background-color: #209cee;
-}
-
-.theme-switch.is-active .slider:before {
-  transform: translateX(26px);
-}
-
-body.is-dark .slider {
-  border-color: #fff;
-}
-
-body.is-dark .slider:before {
-  background-color: #212529;
-  border-color: #fff;
-}
-
 pre {
   background-color: var(--code-bg);
   padding: 1rem;

@@ -55,7 +55,6 @@
     <link rel="stylesheet" href="{{ site.baseurl }}/styles.css" />
 
     <script>
-<<<<<<< HEAD
         function applyTheme(theme) {
             const isDark = theme === "dark";
             document.body.classList.toggle("is-dark", isDark);
@@ -69,28 +68,33 @@
                     el.classList.toggle("is-dark", isDark);
                 });
 
-            // Special handling for the theme-toggle icon
-            const toggleIcon =
-                document.getElementById("theme-toggle-icon") ||
-                document.getElementById("theme-label-icon");
-            if (toggleIcon) {
-                toggleIcon.textContent = isDark ? "☀️" : "🌙";
+            // Special handling for the theme-toggle elements
+            const toggleText = document.getElementById("theme-toggle-text");
+            if (toggleText) {
+                toggleText.textContent = isDark ? "Light Mode" : "Dark Mode";
             }
         }
 
-=======
->>>>>>> parent of 7fc6b5d (fixed: dark mode switch)
         (function () {
             const theme = localStorage.getItem("theme");
-            if (theme === "dark") {
-                document.documentElement.setAttribute("data-theme", "dark");
-            } else if (theme === "light") {
-                document.documentElement.removeAttribute("data-theme");
-            } else if (
-                window.matchMedia("(prefers-color-scheme: dark)").matches
-            ) {
-                document.documentElement.setAttribute("data-theme", "dark");
+            const prefersDark = window.matchMedia(
+                "(prefers-color-scheme: dark)",
+            ).matches;
+            const isDark = theme === "dark" || (!theme && prefersDark);
+
+            // Initial application during load
+            if (isDark) {
+                document.documentElement.classList.add("is-dark");
             }
+
+            window.addEventListener("DOMContentLoaded", () => {
+                if (isDark) {
+                    document.documentElement.classList.remove("is-dark");
+                    applyTheme("dark");
+                } else {
+                    applyTheme("light");
+                }
+            });
         })();
     </script>
 

@@ -1,74 +1,43 @@
-<div class="theme-switch-wrapper">
-    <span style="margin-right: 8px; font-size: 0.8rem" id="theme-label-icon"
-        >🌙</span
-    >
-    <div class="theme-switch" id="theme-toggle-switch">
-        <div class="slider"></div>
-    </div>
+<div
+    id="theme-toggle"
+    style="
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 5px;
+        margin-top: 5px;
+    "
+>
+    <h6 id="theme-toggle-text" style="margin: 0">[Dark]</h6>
 </div>
 
 <script>
-<<<<<<< HEAD
-    const themeSwitch = document.getElementById("theme-toggle-switch");
-    const labelIcon = document.getElementById("theme-label-icon");
+    (function () {
+        const themeToggle = document.getElementById("theme-toggle");
+        const themeToggleText = document.getElementById("theme-toggle-text");
 
-    function updateSwitchUI(theme) {
-        const isDark = theme === "dark";
-        if (isDark) {
-            themeSwitch.classList.add("is-active");
-        } else {
-            themeSwitch.classList.remove("is-active");
+        function updateUI(isDark) {
+            if (themeToggleText) {
+                themeToggleText.textContent = isDark ? "[Light]" : "[Dark]";
+            }
         }
 
-        if (labelIcon) {
-            labelIcon.textContent = isDark ? "☀️" : "🌙";
-        }
-    }
+        // Initialize UI based on current body state
+        window.addEventListener("DOMContentLoaded", () => {
+            const isDark = document.body.classList.contains("is-dark");
+            updateUI(isDark);
+        });
 
-    function toggleTheme() {
-        const isDark = document.body.classList.contains("is-dark");
-        const nextTheme = isDark ? "light" : "dark";
+        themeToggle.addEventListener("click", () => {
+            const isCurrentlyDark = document.body.classList.contains("is-dark");
+            const nextTheme = isCurrentlyDark ? "light" : "dark";
 
-        localStorage.setItem("theme", nextTheme);
-        applyTheme(nextTheme);
-        updateSwitchUI(nextTheme);
-    }
-
-    // Initial switch state based on current body class
-    window.addEventListener("DOMContentLoaded", () => {
-        const currentTheme = document.body.classList.contains("is-dark")
-            ? "dark"
-            : "light";
-        updateSwitchUI(currentTheme);
-=======
-    const themeToggle = document.getElementById("theme-toggle");
-    const themeToggleIcon = document.getElementById("theme-toggle-icon");
-    const htmlElement = document.documentElement;
-
-    function updateIcon() {
-        const theme = htmlElement.getAttribute("data-theme");
-        if (theme === "dark") {
-            themeToggleIcon.textContent = "☀️";
-        } else {
-            themeToggleIcon.textContent = "🌙";
-        }
-    }
-
-    // Initialize icon
-    updateIcon();
-
-    themeToggle.addEventListener("click", () => {
-        let theme = htmlElement.getAttribute("data-theme");
-        if (theme === "dark") {
-            htmlElement.removeAttribute("data-theme");
-            localStorage.setItem("theme", "light");
-        } else {
-            htmlElement.setAttribute("data-theme", "dark");
-            localStorage.setItem("theme", "dark");
-        }
-        updateIcon();
->>>>>>> parent of 7fc6b5d (fixed: dark mode switch)
-    });
-
-    themeSwitch.addEventListener("click", toggleTheme);
+            localStorage.setItem("theme", nextTheme);
+            if (typeof applyTheme === "function") {
+                applyTheme(nextTheme);
+                updateUI(!isCurrentlyDark);
+            }
+        });
+    })();
 </script>
