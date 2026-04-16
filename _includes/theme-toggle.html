@@ -1,17 +1,43 @@
-<button
-    id="theme-toggle"
-    class="nes-btn is-small"
-    style="margin-left: 20px; padding: 0 10px"
->
-    <span id="theme-toggle-icon">🌙</span>
-</button>
+<div class="theme-switch-wrapper">
+    <span style="margin-right: 8px; font-size: 0.8rem" id="theme-label-icon"
+        >🌙</span
+    >
+    <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" />
+        <div class="slider"></div>
+    </label>
+</div>
 
 <script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const theme = document.body.classList.contains("is-dark")
-            ? "light"
-            : "dark";
-        localStorage.setItem("theme", theme);
-        applyTheme(theme);
+    const toggleSwitch = document.querySelector(
+        '.theme-switch input[type="checkbox"]',
+    );
+    const labelIcon = document.getElementById("theme-label-icon");
+
+    function updateSwitchUI(theme) {
+        const isDark = theme === "dark";
+        toggleSwitch.checked = isDark;
+        if (labelIcon) {
+            labelIcon.textContent = isDark ? "☀️" : "🌙";
+        }
+    }
+
+    // Initial switch state based on current body class
+    window.addEventListener("DOMContentLoaded", () => {
+        const currentTheme = document.body.classList.contains("is-dark")
+            ? "dark"
+            : "light";
+        updateSwitchUI(currentTheme);
     });
+
+    toggleSwitch.addEventListener(
+        "change",
+        (e) => {
+            const theme = e.target.checked ? "dark" : "light";
+            localStorage.setItem("theme", theme);
+            applyTheme(theme);
+            updateSwitchUI(theme);
+        },
+        false,
+    );
 </script>

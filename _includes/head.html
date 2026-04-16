@@ -69,7 +69,9 @@
                 });
 
             // Special handling for the theme-toggle icon
-            const toggleIcon = document.getElementById("theme-toggle-icon");
+            const toggleIcon =
+                document.getElementById("theme-toggle-icon") ||
+                document.getElementById("theme-label-icon");
             if (toggleIcon) {
                 toggleIcon.textContent = isDark ? "☀️" : "🌙";
             }
