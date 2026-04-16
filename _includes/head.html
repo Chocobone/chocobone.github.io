@@ -55,6 +55,7 @@
     <link rel="stylesheet" href="{{ site.baseurl }}/styles.css" />
 
     <script>
+<<<<<<< HEAD
         function applyTheme(theme) {
             const isDark = theme === "dark";
             document.body.classList.toggle("is-dark", isDark);
@@ -77,28 +78,19 @@
             }
         }
 
+=======
+>>>>>>> parent of 7fc6b5d (fixed: dark mode switch)
         (function () {
             const theme = localStorage.getItem("theme");
-            const prefersDark = window.matchMedia(
-                "(prefers-color-scheme: dark)",
-            ).matches;
-            const isDark = theme === "dark" || (!theme && prefersDark);
-
-            // Initial application during load
-            if (isDark) {
-                // Since body isn't available yet, we set it on <html> temporarily
-                // and then move it to <body> in a DOMContentLoaded listener
-                document.documentElement.classList.add("is-dark");
+            if (theme === "dark") {
+                document.documentElement.setAttribute("data-theme", "dark");
+            } else if (theme === "light") {
+                document.documentElement.removeAttribute("data-theme");
+            } else if (
+                window.matchMedia("(prefers-color-scheme: dark)").matches
+            ) {
+                document.documentElement.setAttribute("data-theme", "dark");
             }
-
-            window.addEventListener("DOMContentLoaded", () => {
-                if (isDark) {
-                    document.documentElement.classList.remove("is-dark");
-                    applyTheme("dark");
-                } else {
-                    applyTheme("light");
-                }
-            });
         })();
     </script>
 

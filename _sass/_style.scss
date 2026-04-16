@@ -15,8 +15,7 @@ $font-serif: $font-family;
   --code-bg: #f6f6f6;
 }
 
-body.is-dark,
-.is-dark {
+[data-theme="dark"] {
   --bg-color: #212529;
   --text-color: #ffffff;
   --subtext-color: #adb5bd;

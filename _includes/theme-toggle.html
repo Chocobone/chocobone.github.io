@@ -8,6 +8,7 @@
 </div>
 
 <script>
+<<<<<<< HEAD
     const themeSwitch = document.getElementById("theme-toggle-switch");
     const labelIcon = document.getElementById("theme-label-icon");
 
@@ -39,6 +40,34 @@
             ? "dark"
             : "light";
         updateSwitchUI(currentTheme);
+=======
+    const themeToggle = document.getElementById("theme-toggle");
+    const themeToggleIcon = document.getElementById("theme-toggle-icon");
+    const htmlElement = document.documentElement;
+
+    function updateIcon() {
+        const theme = htmlElement.getAttribute("data-theme");
+        if (theme === "dark") {
+            themeToggleIcon.textContent = "☀️";
+        } else {
+            themeToggleIcon.textContent = "🌙";
+        }
+    }
+
+    // Initialize icon
+    updateIcon();
+
+    themeToggle.addEventListener("click", () => {
+        let theme = htmlElement.getAttribute("data-theme");
+        if (theme === "dark") {
+            htmlElement.removeAttribute("data-theme");
+            localStorage.setItem("theme", "light");
+        } else {
+            htmlElement.setAttribute("data-theme", "dark");
+            localStorage.setItem("theme", "dark");
+        }
+        updateIcon();
+>>>>>>> parent of 7fc6b5d (fixed: dark mode switch)
     });
 
     themeSwitch.addEventListener("click", toggleTheme);
