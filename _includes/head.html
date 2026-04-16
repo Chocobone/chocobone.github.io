@@ -55,17 +55,48 @@
     <link rel="stylesheet" href="{{ site.baseurl }}/styles.css" />
 
     <script>
+        function applyTheme(theme) {
+            const isDark = theme === "dark";
+            document.body.classList.toggle("is-dark", isDark);
+
+            // Apply is-dark class to NES.css components that need it
+            document
+                .querySelectorAll(
+                    ".nes-container, .nes-btn, .nes-input, .nes-textarea, .nes-select select, .nes-table, .nes-balloon, .nes-list, .nes-text",
+                )
+                .forEach((el) => {
+                    el.classList.toggle("is-dark", isDark);
+                });
+
+            // Special handling for the theme-toggle icon
+            const toggleIcon = document.getElementById("theme-toggle-icon");
+            if (toggleIcon) {
+                toggleIcon.textContent = isDark ? "☀️" : "🌙";
+            }
+        }
+
         (function () {
             const theme = localStorage.getItem("theme");
-            if (theme === "dark") {
-                document.documentElement.setAttribute("data-theme", "dark");
-            } else if (theme === "light") {
-                document.documentElement.removeAttribute("data-theme");
-            } else if (
-                window.matchMedia("(prefers-color-scheme: dark)").matches
-            ) {
-                document.documentElement.setAttribute("data-theme", "dark");
+            const prefersDark = window.matchMedia(
+                "(prefers-color-scheme: dark)",
+            ).matches;
+            const isDark = theme === "dark" || (!theme && prefersDark);
+
+            // Initial application during load
+            if (isDark) {
+                // Since body isn't available yet, we set it on <html> temporarily
+                // and then move it to <body> in a DOMContentLoaded listener
+                document.documentElement.classList.add("is-dark");
             }
+
+            window.addEventListener("DOMContentLoaded", () => {
+                if (isDark) {
+                    document.documentElement.classList.remove("is-dark");
+                    applyTheme("dark");
+                } else {
+                    applyTheme("light");
+                }
+            });
         })();
     </script>
 
