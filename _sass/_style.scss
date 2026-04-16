@@ -3,34 +3,38 @@ $font-family: "Kongtext", "DungGeunMo", "DotGothic16", "Nuもち", sans-serif;
 $font-heading: "Press Start 2P", "DungGeunMo", "DotGothic16", "Nuもち", cursive;
 $font-serif: $font-family;
 
-/* Colors - Light Mode */
-$bg-light: #ffffff;
-$text-light: #212529;
-$subtext-light: #666666;
-$link-light: #209cee;
-$border-light: #d3d3d3;
+/* Colors - Theme Variables */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #212529;
+  --subtext-color: #666666;
+  --link-color: #209cee;
+  --border-color: #d3d3d3;
+  --header-border: #212529;
+  --blockquote-bg: #f8f9fa;
+  --code-bg: #f6f6f6;
+}
 
-/* Colors - Dark Mode */
-$bg-dark: #212529;
-$text-dark: #ffffff;
-$subtext-dark: #adb5bd;
-$link-dark: #209cee;
-$border-dark: #495057;
+[data-theme="dark"] {
+  --bg-color: #212529;
+  --text-color: #ffffff;
+  --subtext-color: #adb5bd;
+  --link-color: #209cee;
+  --border-color: #495057;
+  --header-border: #ffffff;
+  --blockquote-bg: #343a40;
+  --code-bg: #343a40;
+}
 
 body {
   font-family: $font-family;
   line-height: 1.6;
   margin: 0;
   padding: 0;
-  background-color: $bg-light;
-  color: $text-light;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
-
-  @media (prefers-color-scheme: dark) {
-    background-color: $bg-dark;
-    color: $text-dark;
-  }
 
   @media (max-width: 600px) {
     font-size: 14px;
@@ -48,17 +52,13 @@ body {
 }
 
 /* Header & Nav */
-header {
+.site-header {
   margin-bottom: 2rem;
   position: sticky;
   top: 0;
-  z-index: 1000;
-  background-color: $bg-light;
+  z-index: 9999;
+  background-color: var(--bg-color);
   padding-top: 2rem;
-
-  @media (prefers-color-scheme: dark) {
-    background-color: $bg-dark;
-  }
 
   @media (max-width: 600px) {
     padding-top: 1rem;
@@ -70,12 +70,8 @@ header {
   justify-content: space-between;
   align-items: center;
   padding-bottom: 20px;
-  border-bottom: 4px solid $text-light;
+  border-bottom: 4px solid var(--header-border);
   margin-bottom: 20px;
-
-  @media (prefers-color-scheme: dark) {
-    border-bottom-color: $text-dark;
-  }
 }
 
 nav {
@@ -96,10 +92,7 @@ nav {
     &.nav-link {
         margin-left: 1.5rem;
         font-weight: 400;
-        color: $subtext-light;
-        @media (prefers-color-scheme: dark) {
-            color: $subtext-dark;
-        }
+        color: var(--subtext-color);
     }
   }
 }
@@ -124,14 +117,10 @@ p {
 }
 
 a {
-  color: $link-light;
+  color: var(--link-color);
   text-decoration: none;
   border-bottom: 2px solid currentColor;
   transition: all 0.2s;
-
-  @media (prefers-color-scheme: dark) {
-    color: $link-dark;
-  }
 
   &:hover {
     opacity: 0.8;
@@ -153,12 +142,8 @@ a {
     .note-date {
       font-family: $font-family;
       font-size: 0.8rem;
-      color: $subtext-light;
+      color: var(--subtext-color);
       margin-bottom: 0.4rem;
-
-      @media (prefers-color-scheme: dark) {
-        color: $subtext-dark;
-      }
     }
 
     a {
@@ -177,70 +162,45 @@ a {
 footer {
   margin-top: 6rem;
   padding-top: 2rem;
-  border-top: 4px solid #212529;
+  border-top: 4px solid var(--header-border);
   font-size: 0.8rem;
-  color: $subtext-light;
-
-  @media (prefers-color-scheme: dark) {
-    border-top-color: #ffffff;
-    color: $subtext-dark;
-  }
+  color: var(--subtext-color);
 }
 
 /* Misc */
 hr {
   border: 0;
-  border-top: 4px solid #212529;
+  border-top: 4px solid var(--header-border);
   margin: 3rem 0;
-
-  @media (prefers-color-scheme: dark) {
-    border-top-color: #ffffff;
-  }
 }
 
 blockquote {
   margin: 2rem 0;
   padding: 1.5rem;
-  border-left: 8px solid #212529;
-  background-color: #f8f9fa;
-  color: $subtext-light;
-
-  @media (prefers-color-scheme: dark) {
-    border-left-color: #ffffff;
-    background-color: #343a40;
-    color: $subtext-dark;
-  }
+  border-left: 8px solid var(--header-border);
+  background-color: var(--blockquote-bg);
+  color: var(--subtext-color);
 }
 
 img {
   max-width: 100%;
   height: auto;
-  border: 4px solid #212529;
+  border: 4px solid var(--header-border);
 }
 
 code {
   font-family: $font-family;
-  background-color: #f6f6f6;
+  background-color: var(--code-bg);
   padding: 0.2rem 0.4rem;
-  border: 1px solid #d3d3d3;
+  border: 1px solid var(--border-color);
   font-size: 0.9em;
-
-  @media (prefers-color-scheme: dark) {
-    background-color: #343a40;
-    border-color: #495057;
-  }
 }
 
 pre {
-  background-color: #f6f6f6;
+  background-color: var(--code-bg);
   padding: 1rem;
-  border: 4px solid #212529;
+  border: 4px solid var(--header-border);
   overflow-x: auto;
-
-  @media (prefers-color-scheme: dark) {
-    background-color: #343a40;
-    border-color: #ffffff;
-  }
 
   code {
     background-color: transparent;
