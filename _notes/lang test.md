@@ -1,8 +1,7 @@
 ---
 layout: note
-title:
-  "{ title }":
-permalink: /notes/{{title}}
+title: language_font test
+permalink: /notes/language_font test
 tags:
 ---
 English

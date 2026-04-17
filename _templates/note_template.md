@@ -1,6 +1,6 @@
 ---
 layout: note
-title: {{title}}
-permalink: /notes/{{title}}
+title: "<% tp.file.title %>"
+permalink: /notes/<% tp.file.title %>
 tags:
 ---
