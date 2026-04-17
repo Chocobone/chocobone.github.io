@@ -13,10 +13,13 @@ permalink: /
   <h2>Latest</h2>
   <ul class="note-list">
     {% assign recent_notes = site.notes | sort: "last_modified_at" | reverse %}
-    {% for note in recent_notes limit: 5 %}
+    {% for note in recent_notes limit: 2 %}
       <li>
         <span class="note-date">{{ note.last_modified_at | date: "%B %d, %Y" }}</span>
         <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+        <h5 style="margin-top: 0.5rem; font-weight: normal; opacity: 0.8;">
+          {{ note.content | strip_html | truncate: 50 }}
+        </h5>
       </li>
     {% endfor %}
   </ul>
