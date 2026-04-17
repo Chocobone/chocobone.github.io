@@ -45,7 +45,8 @@ permalink: /
       <div class="tag-group" id="group-{{ tag | slugify }}" style="margin-bottom: 2rem;">
         <h3 style="margin-top: 0; font-size: 1.2rem;">{{ tag | capitalize }}</h3>
         <ul class="note-list" style="margin-top: 1rem;">
-          {% for note in site.notes %}
+          {% assign tag_notes = site.notes | sort: "last_modified_at" | reverse %}
+          {% for note in tag_notes %}
             {% if note.tags contains tag %}
               <li>
                 <span class="note-date">{{ note.last_modified_at | date: "%B %d, %Y" }}</span>
@@ -93,16 +94,3 @@ permalink: /
     }
   });
 </script>
-
-<section style="margin-top: 4rem;">
-  <h2>Writing</h2>
-  <ul class="note-list">
-    {% assign recent_notes = site.notes | sort: "last_modified_at" | reverse %}
-    {% for note in recent_notes offset: 2 %}
-      <li>
-        <span class="note-date">{{ note.last_modified_at | date: "%B %d, %Y" }}</span>
-        <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
-      </li>
-    {% endfor %}
-  </ul>
-</section>
