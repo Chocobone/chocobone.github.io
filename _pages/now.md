@@ -1,5 +1,5 @@
 ---
 layout: page
 title: Now
-permalink: /now/
+permalink: /now
 ---
