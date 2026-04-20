@@ -48,9 +48,7 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
       - name: Build with Jekyll
-        run: |
-          # Ensure baseurl is empty for custom domains if needed, or use the provided one
-          bundle exec jekyll build --source . --destination ../_site --baseurl ""
+        run: bundle exec jekyll build --source . --destination ../_site --baseurl "${{ steps.pages.outputs.base_path }}"
         working-directory: _engine
         env:
           JEKYLL_ENV: production
