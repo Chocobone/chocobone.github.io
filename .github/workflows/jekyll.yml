@@ -33,23 +33,29 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Prepare build environment
+        run: |
+          # Move notes and templates into engine directory for Jekyll to process
+          cp -r notes _engine/_notes
+          cp -r templates _engine/_templates
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          # ruby-version: '3.1' # Not needed with a .ruby-version file
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-          cache-version: 0 # Increment this number if you need to re-download cached gems
+          bundler-cache: true
+          cache-version: 0
+          working-directory: _engine
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
       - name: Build with Jekyll
-        # Outputs to the './_site' directory by default
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        run: bundle exec jekyll build --source . --destination ../_site --baseurl "${{ steps.pages.outputs.base_path }}"
+        working-directory: _engine
         env:
           JEKYLL_ENV: production
       - name: Upload artifact
-        # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
 
   # Deployment job
   deploy:

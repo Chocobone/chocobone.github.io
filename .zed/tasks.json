@@ -1,7 +1,7 @@
 [
   {
     "label": "Jekyll: Serve (Docker)",
-    "command": "docker run --rm -v \"${PWD}:/srv/jekyll\" -p 4000:4000 jekyll/jekyll jekyll serve --livereload",
+    "command": "docker run --rm -v \"${PWD}/_engine:/srv/jekyll\" -v \"${PWD}/notes:/srv/jekyll/_notes\" -v \"${PWD}/templates:/srv/jekyll/_templates\" -p 4000:4000 jekyll/jekyll jekyll serve --livereload --host 0.0.0.0",
     "use_new_terminal": true,
     "allow_concurrent_runs": false,
   },
