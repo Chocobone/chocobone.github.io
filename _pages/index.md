@@ -7,10 +7,10 @@ permalink: /
 <section style="margin-top: 4rem;">
   <h2>Latest</h2>
   <ul class="note-list">
-    {% assign recent_notes = site.notes | sort: "last_modified_at" | reverse %}
+    {% assign recent_notes = site.notes | sort: "created" | reverse %}
     {% for note in recent_notes limit: 1 %}
       <li>
-        <span class="note-date">{{ note.last_modified_at | date: "%B %d, %Y" }}</span>
+        <span class="note-date">{{ note.created | date: "%B %d, %Y" }}</span>
         <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
         <h5 style="margin-top: 0.5rem; font-weight: normal; opacity: 0.8;">
           {{ note.content | strip_html | truncate: 50 }}
@@ -43,10 +43,10 @@ permalink: /
     <!-- All Notes Group -->
     <div class="tag-group" id="group-all" style="margin-bottom: 2rem;">
       <ul class="note-list" style="margin-top: 1rem;">
-        {% assign all_notes = site.notes | sort: "last_modified_at" | reverse %}
+        {% assign all_notes = site.notes | sort: "created" | reverse %}
         {% for note in all_notes %}
           <li>
-            <span class="note-date">{{ note.last_modified_at | date: "%B %d, %Y" }}</span>
+            <span class="note-date">{{ note.created | date: "%B %d, %Y" }}</span>
             <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
           </li>
         {% endfor %}
@@ -56,11 +56,11 @@ permalink: /
     {% for tag in unique_tags %}
       <div class="tag-group" id="group-{{ tag | slugify }}" style="margin-bottom: 2rem; display: none;">
         <ul class="note-list" style="margin-top: 1rem;">
-          {% assign tag_notes = site.notes | sort: "last_modified_at" | reverse %}
+          {% assign tag_notes = site.notes | sort: "created" | reverse %}
           {% for note in tag_notes %}
             {% if note.tags contains tag %}
               <li>
-                <span class="note-date">{{ note.last_modified_at | date: "%B %d, %Y" }}</span>
+                <span class="note-date">{{ note.created | date: "%B %d, %Y" }}</span>
                 <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
               </li>
             {% endif %}
