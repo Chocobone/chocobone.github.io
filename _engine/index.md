@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Home
+id: home
 permalink: /
 hide_title: true
 ---
@@ -43,6 +44,7 @@ hide_title: true
   <div id="topic-notes">
     {% for tag in unique_tags %}
       <div class="tag-group" id="group-{{ tag | slugify }}" style="margin-bottom: 2rem;">
+        <h3 style="margin-top: 0; font-size: 1.2rem;">{{ tag | capitalize }}</h3>
         <ul class="note-list" style="margin-top: 1rem;">
           {% assign tag_notes = site.notes | sort: "last_modified_at" | reverse %}
           {% for note in tag_notes %}
