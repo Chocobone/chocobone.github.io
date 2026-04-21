@@ -15,20 +15,35 @@ class BidirectionalLinksGenerator < Jekyll::Generator
     # anchor tag elements (<a>) with "internal-link" CSS class
     all_docs.each do |current_note|
       # Handle Obsidian image WikiLinks ![[image.png]]
-      current_note.content.gsub!(
-        /!\[\[(.+?)\|(.+?)\]\]/i,
-        "<img src='/assets/images/\\1' alt='\\2' style='max-width: 100%; height: auto; border: 4px solid var(--header-border);'>"
-      )
-      current_note.content.gsub!(
-        /!\[\[(.+?)\]\]/i,
-        "<img src='/assets/images/\\1' alt='\\1' style='max-width: 100%; height: auto; border: 4px solid var(--header-border);'>"
-      )
+      current_note.content.gsub!(/!\[\[(.+?)(?:\|(.+?))?\]\]/i) do
+        filename = $1
+        alt = $2 || filename
+        # Don't prefix if it's already an absolute path or has a protocol
+        if filename.start_with?('/') || filename.start_with?('http')
+          src = filename
+        elsif filename.start_with?('assets/images/')
+          src = "#{site.baseurl}/#{filename}"
+        else
+          src = "#{site.baseurl}/assets/images/#{filename}"
+        end
+        # Encode spaces for URL
+        src = src.gsub(' ', '%20')
+        "<img src='#{src}' alt='#{alt}' style='max-width: 100%; height: auto; border: 4px solid var(--header-border);'>"
+      end
 
       # Handle standard Markdown image links that are relative and point to assets/images
-      current_note.content.gsub!(
-        /!\[(.*?)\]\((?!http|https|\/)(.+?)\)/i,
-        "![\\1](/assets/images/\\2)"
-      )
+      current_note.content.gsub!(/!\[(.*?)\]\((?!http|https|\/)(.+?)\)/i) do
+        alt = $1
+        filename = $2
+        if filename.start_with?('assets/images/')
+          src = "#{site.baseurl}/#{filename}"
+        else
+          src = "#{site.baseurl}/assets/images/#{filename}"
+        end
+        # Encode spaces for URL if not already encoded
+        src = src.gsub(' ', '%20')
+        "![#{alt}](#{src})"
+      end
 
       all_docs.each do |note_potentially_linked_to|
         note_title_regexp_pattern = Regexp.escape(
