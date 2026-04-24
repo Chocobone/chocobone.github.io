@@ -2,12 +2,34 @@
 <html lang="en">
     {% include head.html %}
     <body>
-        <div class="wrapper">
-            <header class="site-header">{% include nav.html %}</header>
-            <main>{{ content }}</main>
-            <footer style="margin-top: 20px; text-align: center">
-                {% include footer.html %}
-            </footer>
+        <div id="nescss">
+            <header>
+                <div class="container">{% include nav.html %}</div>
+            </header>
+            <div class="container">
+                <main class="main-content">{{ content }}</main>
+                <footer>{% include footer.html %}</footer>
+            </div>
         </div>
+
+        <a
+            class="github-link active"
+            href="https://github.com/Chocobone"
+            target="_blank"
+            rel="noopener"
+        >
+            <p class="nes-balloon from-right">Fork me on GitHub!</p>
+            <i class="nes-octocat animate"></i>
+        </a>
+
+        <button
+            type="button"
+            class="nes-btn is-error scroll-btn"
+            id="scroll-to-top"
+        >
+            <span>&lt;</span>
+        </button>
+
+        <script src="{{ site.baseurl }}/script.js"></script>
     </body>
 </html>

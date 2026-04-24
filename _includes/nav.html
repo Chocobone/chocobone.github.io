@@ -1,31 +1,13 @@
-<div class="nav-container">
-    <div
-        class="nav-brand"
-        style="display: flex; flex-direction: column; gap: 5px"
-    >
-        <a
-            href="{{ site.baseurl }}/"
-            style="text-decoration: none; color: inherit"
-        >
-            <h1 style="margin: 0">Chocobone.dev</h1>
-        </a>
-        <div style="display: flex; gap: 20px">
-            <a
-                href="{{ site.baseurl }}/about"
-                style="text-decoration: none; color: inherit"
-            >
-                <h5 style="margin: 0">About</h5>
-            </a>
-            <!--<a
-                href="{{ site.baseurl }}/now"
-                style="text-decoration: none; color: inherit"
-            >
-                <h5 style="margin: 0">Now</h5>
-            </a>-->
-        </div>
-    </div>
+<div class="nav-brand">
+    <a href="{{ site.baseurl }}/">
+        <h1>Chocobone.dev</h1>
+    </a>
+    <p>Retro-style blog</p>
+</div>
 
-    <div style="display: flex; flex-direction: column; align-items: flex-end">
-        {% include social-buttons.html %} {% include theme-toggle.html %}
+<div class="social-buttons">
+    <div style="display: flex; gap: 10px; align-items: center">
+        <a href="{{ site.baseurl }}/about" class="nes-btn is-primary">About</a>
+        {% include theme-toggle.html %} {% include social-buttons.html %}
     </div>
 </div>
