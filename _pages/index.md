@@ -29,11 +29,11 @@ permalink: /
   {% assign unique_tags = all_tags | uniq | sort %}
 
   <div class="tag-container" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem;">
-    <button class="nes-btn tag-button is-primary" onclick="filterTags('all', this)">
+    <button class="tag-button active" onclick="filterTags('all', this)" style="padding: 0.3rem 0.8rem; border: 2px solid var(--header-border); background: transparent; cursor: pointer; font-family: inherit; font-size: 0.8rem;">
       All
     </button>
     {% for tag in unique_tags %}
-      <button class="nes-btn tag-button" onclick="filterTags('{{ tag | slugify }}', this)">
+      <button class="tag-button" onclick="filterTags('{{ tag | slugify }}', this)" style="padding: 0.3rem 0.8rem; border: 2px solid var(--header-border); background: transparent; cursor: pointer; font-family: inherit; font-size: 0.8rem;">
         {{ tag | capitalize }}
       </button>
     {% endfor %}
@@ -75,9 +75,13 @@ permalink: /
   function filterTags(tagSlug, button) {
     // Update button styles
     document.querySelectorAll('.tag-button').forEach(btn => {
-      btn.classList.remove('is-primary');
+      btn.classList.remove('active');
+      btn.style.backgroundColor = 'transparent';
+      btn.style.color = 'var(--text-color)';
     });
-    button.classList.add('is-primary');
+    button.classList.add('active');
+    button.style.backgroundColor = 'var(--header-border)';
+    button.style.color = 'var(--bg-color)';
 
     // Filter groups
     const groups = document.querySelectorAll('.tag-group');
@@ -89,4 +93,13 @@ permalink: /
       }
     });
   }
+
+  // Initial state for 'All' button
+  document.addEventListener('DOMContentLoaded', () => {
+    const allBtn = document.querySelector('.tag-button.active');
+    if (allBtn) {
+      allBtn.style.backgroundColor = 'var(--header-border)';
+      allBtn.style.color = 'var(--bg-color)';
+    }
+  });
 </script>

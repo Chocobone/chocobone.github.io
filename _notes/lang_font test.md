@@ -7,12 +7,3 @@ tags:
 ---
 
 English 한국어 にほんご 漢字 español
-
-```python
-import sys
-input = sys.stdin.readline
-
-a = int(input())
-b = int(input())
-print(a+b)
-```
