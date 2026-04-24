@@ -13,7 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1000);
   }
 
+  // Only target the outermost .highlight element to avoid duplicates
   document.querySelectorAll(".highlight").forEach((block) => {
+    // If this .highlight is inside another .highlight, skip it
+    if (block.parentElement.closest(".highlight")) return;
     if (block.querySelector(".copy-code-button")) return;
 
     const button = document.createElement("button");
