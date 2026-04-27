@@ -19,6 +19,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (block.parentElement.closest(".highlight")) return;
     if (block.querySelector(".copy-code-button")) return;
 
+    const lights = document.createElement("div");
+    lights.className = "code-traffic-lights";
+    lights.innerHTML =
+      '<span class="traffic-light tl-red"></span>' +
+      '<span class="traffic-light tl-yellow"></span>' +
+      '<span class="traffic-light tl-green"></span>';
+    block.insertBefore(lights, block.firstChild);
+
     const button = document.createElement("button");
     button.className = "nes-btn is-primary copy-code-button";
     button.type = "button";

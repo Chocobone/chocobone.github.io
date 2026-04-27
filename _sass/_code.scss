@@ -4,6 +4,7 @@
     background: var(--code-bg);
     color: var(--text-color);
     padding: 1.5rem;
+    padding-top: 2.5rem;
     border-radius: 8px;
     font-size: 0.9em;
     overflow: auto;
@@ -412,6 +413,71 @@
     .il {
         color: #bd93f9;
     } /* Literal.Number.Integer.Long */
+}
+
+/* 8-bit macOS Traffic Lights */
+.code-traffic-lights {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    image-rendering: pixelated;
+    z-index: 5;
+}
+
+.traffic-light {
+    position: relative;
+    display: block;
+    width: 10px;
+    height: 10px;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 2px;
+        width: 2px;
+        height: 2px;
+        image-rendering: pixelated;
+    }
+
+    // Pixel art circle pattern (5×5 grid, 2px per pixel):
+    //   .###.
+    //   #####
+    //   #####
+    //   #####
+    //   .###.
+    &.tl-red::before {
+        background: #ff5f57;
+        box-shadow:
+            2px 0 #ff5f57, 4px 0 #ff5f57,
+            -2px 2px #ff5f57, 0 2px #ff5f57, 2px 2px #ff5f57, 4px 2px #ff5f57, 6px 2px #ff5f57,
+            -2px 4px #ff5f57, 0 4px #ff5f57, 2px 4px #ff5f57, 4px 4px #ff5f57, 6px 4px #ff5f57,
+            -2px 6px #ff5f57, 0 6px #ff5f57, 2px 6px #ff5f57, 4px 6px #ff5f57, 6px 6px #ff5f57,
+            0 8px #ff5f57, 2px 8px #ff5f57, 4px 8px #ff5f57;
+    }
+
+    &.tl-yellow::before {
+        background: #febc2e;
+        box-shadow:
+            2px 0 #febc2e, 4px 0 #febc2e,
+            -2px 2px #febc2e, 0 2px #febc2e, 2px 2px #febc2e, 4px 2px #febc2e, 6px 2px #febc2e,
+            -2px 4px #febc2e, 0 4px #febc2e, 2px 4px #febc2e, 4px 4px #febc2e, 6px 4px #febc2e,
+            -2px 6px #febc2e, 0 6px #febc2e, 2px 6px #febc2e, 4px 6px #febc2e, 6px 6px #febc2e,
+            0 8px #febc2e, 2px 8px #febc2e, 4px 8px #febc2e;
+    }
+
+    &.tl-green::before {
+        background: #28c840;
+        box-shadow:
+            2px 0 #28c840, 4px 0 #28c840,
+            -2px 2px #28c840, 0 2px #28c840, 2px 2px #28c840, 4px 2px #28c840, 6px 2px #28c840,
+            -2px 4px #28c840, 0 4px #28c840, 2px 4px #28c840, 4px 4px #28c840, 6px 4px #28c840,
+            -2px 6px #28c840, 0 6px #28c840, 2px 6px #28c840, 4px 6px #28c840, 6px 6px #28c840,
+            0 8px #28c840, 2px 8px #28c840, 4px 8px #28c840;
+    }
 }
 
 /* Copy Button */
