@@ -88,6 +88,34 @@ body {
     padding-bottom: 20px;
     border-bottom: 4px solid var(--header-border);
     margin-bottom: 20px;
+    gap: 1rem;
+}
+
+.nav-brand {
+    min-width: 0;
+    flex: 1 1 auto;
+
+    h1 {
+        font-size: clamp(0.7rem, 4vw, 2rem);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0;
+    }
+}
+
+.nav-right {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .social-buttons .share {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        white-space: nowrap;
+    }
 }
 
 nav {
