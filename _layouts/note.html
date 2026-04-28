@@ -11,12 +11,17 @@ layout: default
         "
     >
         <h2 class="title">{{ page.title }}</h2>
-        <div
-            class="nes-text is-disabled"
-            style="font-size: 0.7rem; margin-top: 10px"
-        >
-            {% if page.last_modified_at %} Last updated on {{
-            page.last_modified_at | date: "%B %-d, %Y" }} {% endif %}
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; margin-top: 10px;">
+            {% if page.last_modified_at %}
+            <h6 class="nes-text is-disabled" style="margin: 0;">
+                Last updated on {{ page.last_modified_at | date: "%B %-d, %Y" }}
+            </h6>
+            {% endif %}
+            {% if page.tags %}
+                {% for tag in page.tags %}
+                <h6 class="nes-text is-primary" style="margin: 0;">#{{ tag }}</h6>
+                {% endfor %}
+            {% endif %}
         </div>
     </header>
 
